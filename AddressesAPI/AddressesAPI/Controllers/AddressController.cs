@@ -24,5 +24,13 @@ namespace AddressesAPI.Controllers
         {
             return Ok(addresses.FirstOrDefault(c => c.Id == id));
         }
+
+        [HttpPost]
+        public ActionResult<List<Address>> AddAddress(Address newAddress)
+        {
+            addresses.Add(newAddress);
+            return Ok(addresses);
+        }
+
     }
 }
