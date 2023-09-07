@@ -9,8 +9,8 @@ namespace AddressesAPI.Controllers
     {
         private static List<Address> addresses = new List<Address>()
         {
-            new Address(),
-            new Address{Id=1, Street = "Eng. Duarte pacheco", Postal_code= 4575-234, Parish = "Torrao",Council= "MCN", District = "Porto", Country = "Portugal"}
+            //new Address(),
+            new Address{Id=1, Street = "Eng. Duarte pacheco", Postal_code= "4575-234", Parish = "Torrao",Council= "MCN", District = "Porto", Country = "Portugal"}
         };
 
         [HttpGet("GetAll")]
@@ -19,10 +19,10 @@ namespace AddressesAPI.Controllers
             return Ok(addresses);
         }
 
-        [HttpGet("Single")]
-        public ActionResult<List<Address>> GetSingle()
+        [HttpGet("{id}")]
+        public ActionResult<List<Address>> GetSingle(int id)
         {
-            return Ok(addresses[1]);
+            return Ok(addresses.FirstOrDefault(c => c.Id == id));
         }
     }
 }
