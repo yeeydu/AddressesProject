@@ -474,11 +474,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yeeyson\\source\\repos\\AddressesProject\\AddressesAPI\\AddressesAPI\\AddressesAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Yeeyson\\source\\repos\\AddressesProject\\AddressesAPI\\AddressesAPI.csproj",
       "projectName": "AddressesAPI",
-      "projectPath": "C:\\Users\\Yeeyson\\source\\repos\\AddressesProject\\AddressesAPI\\AddressesAPI\\AddressesAPI.csproj",
+      "projectPath": "C:\\Users\\Yeeyson\\source\\repos\\AddressesProject\\AddressesAPI\\AddressesAPI.csproj",
       "packagesPath": "C:\\Users\\Yeeyson\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yeeyson\\source\\repos\\AddressesProject\\AddressesAPI\\AddressesAPI\\obj\\",
+      "outputPath": "C:\\Users\\Yeeyson\\source\\repos\\AddressesProject\\AddressesAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yeeyson\\AppData\\Roaming\\NuGet\\NuGet.Config",
