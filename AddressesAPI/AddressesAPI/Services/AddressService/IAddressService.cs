@@ -11,5 +11,6 @@ namespace AddressesAPI.Services.AddressService
 
         Task<ServiceResponse<List<GetAddressDto>>> AddAddress(AddAddressDto newAddress);
 
+        Task<ServiceResponse<GetAddressDto>> UpdateAddress(UpdateAddressDto updatedAddress);
     }
 }

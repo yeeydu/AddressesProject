@@ -8,7 +8,6 @@ namespace AddressesAPI.Services.AddressService
     {
         private static List<Address> addresses = new List<Address>()
         {
-            new Address(),
             new Address{Id=1, Street = "Eng. Duarte pacheco", Postal_code= "4575-234", Parish = "Torrao",Council= "MCN", District = "Porto", Country = "Portugal"}
         };
         private readonly IMapper _mapper;
@@ -24,7 +23,7 @@ namespace AddressesAPI.Services.AddressService
             var address = _mapper.Map<Address>(newAddress);
             address.Id = addresses.Max(c => c.Id) + 1;  // add Id
             addresses.Add(address);
-            addresses.Add(_mapper.Map<Address>(newAddress));
+            //addresses.Add(_mapper.Map<Address>(newAddress));
             serviceResponse.Data = addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
             return serviceResponse;
         }
@@ -42,6 +41,37 @@ namespace AddressesAPI.Services.AddressService
         {
             var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
             serviceResponse.Data = addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
+
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetAddressDto>> UpdateAddress(UpdateAddressDto updatedAddress)
+        {
+                var serviceResponse = new ServiceResponse<GetAddressDto>();
+            try
+            {
+                var address = addresses.FirstOrDefault(c => c.Id == updatedAddress.Id);
+                if(address == null)
+                {
+                    throw new Exception($"Address id {updatedAddress.Id} was not found");
+                }
+
+                address.Street = updatedAddress.Street;
+                address.District = updatedAddress.District;
+                address.Country = updatedAddress.Country;
+                address.Parish = updatedAddress.Parish;
+                address.Council = updatedAddress.Council;
+                address.Postal_code = updatedAddress.Postal_code;
+
+                serviceResponse.Data = _mapper.Map<GetAddressDto>(address);
+            }
+            catch (Exception ex)
+            {
+
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            
 
             return serviceResponse;
         }

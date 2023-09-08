@@ -35,5 +35,16 @@ namespace AddressesAPI.Controllers
             return Ok(await _addressService.AddAddress(newAddress));
         }
 
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> UpdateAddress(UpdateAddressDto updatedAddress)
+        {
+            var response = await _addressService.UpdateAddress(updatedAddress);
+            if(response.Data is null) 
+            {
+                return NotFound(response);
+            }
+            return Ok(response.Data);
+        }
+
     }
 }
