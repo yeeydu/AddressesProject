@@ -1,4 +1,5 @@
 ﻿global using AddressesAPI.Models;
+using AddressesAPI.Services.AddressService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AddressesAPI.Controllers
@@ -7,29 +8,30 @@ namespace AddressesAPI.Controllers
     [Route("api/[controller]")]
     public class AddressController : ControllerBase
     {
-        private static List<Address> addresses = new List<Address>()
+        // Add Address Service
+        private readonly IAddressService _addressService;
+        public AddressController(IAddressService addressService)
         {
-            //new Address(),
-            new Address{Id=1, Street = "Eng. Duarte pacheco", Postal_code= "4575-234", Parish = "Torrao",Council= "MCN", District = "Porto", Country = "Portugal"}
-        };
+            _addressService = addressService;
+        }
 
         [HttpGet("GetAll")]
-        public ActionResult<List<Address>> Get()
+        public async Task<ActionResult<List<Address>>> Get()
         {
-            return Ok(addresses);
+            return Ok(await _addressService.GetAllAddresses());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<List<Address>> GetSingle(int id)
+        public async Task<ActionResult<List<Address>>> GetSingle(int id)
         {
-            return Ok(addresses.FirstOrDefault(c => c.Id == id));
+            return Ok(await _addressService.GetAddressById(id));
         }
 
         [HttpPost]
-        public ActionResult<List<Address>> AddAddress(Address newAddress)
+        public async Task<ActionResult<List<Address>>> AddAddress(Address newAddress)
         {
-            addresses.Add(newAddress);
-            return Ok(addresses);
+         
+            return Ok(await _addressService.AddAddress(newAddress));
         }
 
     }
