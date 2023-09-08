@@ -1,12 +1,14 @@
-﻿namespace AddressesAPI.Services.AddressService
+﻿using AddressesAPI.Models;
+
+namespace AddressesAPI.Services.AddressService
 {
     public interface IAddressService
     {
-        Task<List<Address>> GetAllAddresses();
+        Task<ServiceResponse<List<Address>>> GetAllAddresses();
 
-        Task<Address> GetAddressById(int id);
+        Task<ServiceResponse<Address>> GetAddressById(int id);
 
-        Task<List<Address>> AddAddress(Address newAddress);
+        Task<ServiceResponse<List<Address>>> AddAddress(Address newAddress);
 
     }
 }

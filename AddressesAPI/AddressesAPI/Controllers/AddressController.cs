@@ -16,19 +16,19 @@ namespace AddressesAPI.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<Address>>> Get()
+        public async Task<ActionResult<ServiceResponse<List<Address>>>> Get()
         {
             return Ok(await _addressService.GetAllAddresses());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Address>>> GetSingle(int id)
+        public async Task<ActionResult<ServiceResponse<List<Address>>>> GetSingle(int id)
         {
             return Ok(await _addressService.GetAddressById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Address>>> AddAddress(Address newAddress)
+        public async Task<ActionResult<ServiceResponse<List<Address>>>> AddAddress(Address newAddress)
         {
          
             return Ok(await _addressService.AddAddress(newAddress));
