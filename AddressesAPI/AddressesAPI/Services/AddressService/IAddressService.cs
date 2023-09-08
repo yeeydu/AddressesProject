@@ -1,14 +1,15 @@
-﻿using AddressesAPI.Models;
+﻿using AddressesAPI.Dtos.Address;
+using AddressesAPI.Models;
 
 namespace AddressesAPI.Services.AddressService
 {
     public interface IAddressService
     {
-        Task<ServiceResponse<List<Address>>> GetAllAddresses();
+        Task<ServiceResponse<List<GetAddressDto>>> GetAllAddresses();
 
-        Task<ServiceResponse<Address>> GetAddressById(int id);
+        Task<ServiceResponse<GetAddressDto>> GetAddressById(int id);
 
-        Task<ServiceResponse<List<Address>>> AddAddress(Address newAddress);
+        Task<ServiceResponse<List<GetAddressDto>>> AddAddress(AddAddressDto newAddress);
 
     }
 }

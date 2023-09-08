@@ -1,6 +1,6 @@
-﻿namespace AddressesAPI.Models
+﻿namespace AddressesAPI.Dtos.Address
 {
-    public class Address
+    public class GetAddressDto
     {
         public int Id { get; set; }
         public string? Street { get; set; }
@@ -9,12 +9,5 @@
         public string? Council { get; set; }
         public string? District { get; set; }
         public string? Country { get; set; }
-
-        internal int Max(Func<object, object> value)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
-
-
