@@ -46,5 +46,16 @@ namespace AddressesAPI.Controllers
             return Ok(response.Data);
         }
 
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> DeleteAddress(int id)
+        {
+            var response = await _addressService.DeleteAddress(id);
+            if (response.Data is null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response.Data);
+        }
     }
 }

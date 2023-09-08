@@ -28,6 +28,32 @@ namespace AddressesAPI.Services.AddressService
             return serviceResponse;
         }
 
+        public async Task<ServiceResponse<List<GetAddressDto>>> DeleteAddress(int id)
+        {
+            var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
+            try
+            {
+                var address = addresses.FirstOrDefault(c => c.Id == id);
+                if (address == null)
+                {
+                    throw new Exception($"Address id {id} was not found");
+                }
+
+                addresses.Remove(address);
+
+                serviceResponse.Data = addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+
+            return serviceResponse;
+        }
+
         public async Task<ServiceResponse<GetAddressDto>> GetAddressById(int id)
         {
             var serviceResponse = new ServiceResponse<GetAddressDto>();
@@ -47,11 +73,11 @@ namespace AddressesAPI.Services.AddressService
 
         public async Task<ServiceResponse<GetAddressDto>> UpdateAddress(UpdateAddressDto updatedAddress)
         {
-                var serviceResponse = new ServiceResponse<GetAddressDto>();
+            var serviceResponse = new ServiceResponse<GetAddressDto>();
             try
             {
                 var address = addresses.FirstOrDefault(c => c.Id == updatedAddress.Id);
-                if(address == null)
+                if (address == null)
                 {
                     throw new Exception($"Address id {updatedAddress.Id} was not found");
                 }
@@ -71,7 +97,7 @@ namespace AddressesAPI.Services.AddressService
                 serviceResponse.Success = false;
                 serviceResponse.Message = ex.Message;
             }
-            
+
 
             return serviceResponse;
         }
