@@ -36,13 +36,14 @@ namespace AddressesAPI.Services.AddressService
             var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
             try
             {
-                var address = addresses.FirstOrDefault(c => c.Id == id);
-                if (address == null)
+                var dbAddresses = await _context.Addresses.FirstOrDefaultAsync(c => c.Id == id);
+                if (dbAddresses == null)
                 {
                     throw new Exception($"Address id {id} was not found");
                 }
 
-                addresses.Remove(address);
+                _context.Addresses.Remove(dbAddresses);
+                await _context.SaveChangesAsync();
 
                 serviceResponse.Data = addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
             }
