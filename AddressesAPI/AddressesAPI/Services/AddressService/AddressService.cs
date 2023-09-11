@@ -80,20 +80,22 @@ namespace AddressesAPI.Services.AddressService
             var serviceResponse = new ServiceResponse<GetAddressDto>();
             try
             {
-                var address = addresses.FirstOrDefault(c => c.Id == updatedAddress.Id);
-                if (address == null)
+                var dbAddress = await _context.Addresses.FirstOrDefaultAsync(c => c.Id == updatedAddress.Id);
+                if (dbAddress == null)
                 {
                     throw new Exception($"Address id {updatedAddress.Id} was not found");
                 }
 
-                address.Street = updatedAddress.Street;
-                address.District = updatedAddress.District;
-                address.Country = updatedAddress.Country;
-                address.Parish = updatedAddress.Parish;
-                address.Council = updatedAddress.Council;
-                address.Postal_code = updatedAddress.Postal_code;
+                dbAddress.Street = updatedAddress.Street;
+                dbAddress.District = updatedAddress.District;
+                dbAddress.Country = updatedAddress.Country;
+                dbAddress.Parish = updatedAddress.Parish;
+                dbAddress.Council = updatedAddress.Council;
+                dbAddress.Postal_code = updatedAddress.Postal_code;
 
-                serviceResponse.Data = _mapper.Map<GetAddressDto>(address);
+                serviceResponse.Data = _mapper.Map<GetAddressDto>(dbAddress);
+
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
