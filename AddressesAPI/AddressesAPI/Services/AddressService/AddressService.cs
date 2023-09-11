@@ -23,13 +23,13 @@ namespace AddressesAPI.Services.AddressService
         public async Task<ServiceResponse<List<GetAddressDto>>> AddAddress(AddAddressDto newAddress)
         {
             var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
-            var address = _mapper.Map<Address>(newAddress);
-            address.Id = _context.Addresses.Max(c => c.Id) + 1;  // add Id
-            _context.Addresses.Add(address);
+            var dbAddress = _mapper.Map<Address>(newAddress);
+            dbAddress.Id = _context.Addresses.Max(c => c.Id) + 1;  // add Id
+            //_context.Addresses.Add(dbAddress);
             _context.Addresses.Add(_mapper.Map<Address>(newAddress));
+            await _context.SaveChangesAsync();
             serviceResponse.Data = _context.Addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
 
-            await _context.SaveChangesAsync();
             return serviceResponse;
         }
 
