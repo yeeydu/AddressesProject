@@ -1,4 +1,5 @@
 ﻿global using AutoMapper;
+using AddressesAPI.Data;
 using AddressesAPI.Dtos.Address;
 using AddressesAPI.Models;
 
@@ -11,10 +12,12 @@ namespace AddressesAPI.Services.AddressService
             new Address{Id=1, Street = "Eng. Duarte pacheco", Postal_code= "4575-234", Parish = "Torrao",Council= "MCN", District = "Porto", Country = "Portugal"}
         };
         private readonly IMapper _mapper;
+        private readonly DataContext _context;
 
-        public AddressService(IMapper mapper)
+        public AddressService(IMapper mapper, DataContext context)
         {
             _mapper = mapper;
+            _context = context;
         }
 
         public async Task<ServiceResponse<List<GetAddressDto>>> AddAddress(AddAddressDto newAddress)
@@ -57,8 +60,8 @@ namespace AddressesAPI.Services.AddressService
         public async Task<ServiceResponse<GetAddressDto>> GetAddressById(int id)
         {
             var serviceResponse = new ServiceResponse<GetAddressDto>();
-            var address = addresses.FirstOrDefault(c => c.Id == id);
-            serviceResponse.Data = _mapper.Map<GetAddressDto>(address); //dto mapper
+            var dbAddresses = await _context.Addresses.FirstOrDefaultAsync(c => c.Id == id);
+            serviceResponse.Data = _mapper.Map<GetAddressDto>(dbAddresses); //dto mapper
             return serviceResponse;
 
         }
@@ -66,7 +69,8 @@ namespace AddressesAPI.Services.AddressService
         public async Task<ServiceResponse<List<GetAddressDto>>> GetAllAddresses()
         {
             var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
-            serviceResponse.Data = addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
+            var dbAddresses = await _context.Addresses.ToListAsync();
+            serviceResponse.Data = dbAddresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
 
             return serviceResponse;
         }
