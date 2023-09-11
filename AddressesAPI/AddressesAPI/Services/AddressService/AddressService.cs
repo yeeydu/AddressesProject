@@ -7,10 +7,10 @@ namespace AddressesAPI.Services.AddressService
 {
     public class AddressService : IAddressService
     {
-        private static List<Address> addresses = new List<Address>()
-        {
-            new Address{Id=1, Street = "Eng. Duarte pacheco", Postal_code= "4575-234", Parish = "Torrao",Council= "MCN", District = "Porto", Country = "Portugal"}
-        };
+        //private static List<Address> addresses = new List<Address>()
+        //{
+        //    new Address{Id=1, Street = "Eng. Duarte pacheco", Postal_code= "4575-234", Parish = "Torrao",Council= "MCN", District = "Porto", Country = "Portugal"}
+        //};
         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
@@ -24,10 +24,12 @@ namespace AddressesAPI.Services.AddressService
         {
             var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
             var address = _mapper.Map<Address>(newAddress);
-            address.Id = addresses.Max(c => c.Id) + 1;  // add Id
-            addresses.Add(address);
+            address.Id = _context.Addresses.Max(c => c.Id) + 1;  // add Id
+            _context.Addresses.Add(address);
             //addresses.Add(_mapper.Map<Address>(newAddress));
-            serviceResponse.Data = addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
+            serviceResponse.Data = _context.Addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
+
+            await _context.SaveChangesAsync();
             return serviceResponse;
         }
 
