@@ -47,7 +47,7 @@ namespace AddressesAPI.Services.AddressService
                 _context.Addresses.Remove(dbAddresses);
                 await _context.SaveChangesAsync();
 
-                serviceResponse.Data = addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
+                serviceResponse.Data = _context.Addresses.Select(c => _mapper.Map<GetAddressDto>(c)).ToList();
             }
             catch (Exception ex)
             {
