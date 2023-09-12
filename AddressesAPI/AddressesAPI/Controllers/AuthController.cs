@@ -33,7 +33,7 @@ namespace AddressesAPI.Controllers
         /// <returns></returns>
         [HttpGet, Authorize]
         public ActionResult<string> Get()
-        { 
+        {
             var userName = _userService.GetUserName();
             return Ok(userName);
 
@@ -93,14 +93,14 @@ namespace AddressesAPI.Controllers
             // create Key token
             var Key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                 _configuration.GetSection("AppSettings:Token").Value!));
-            
+
             //signing in token
             var creds = new SigningCredentials(Key, SecurityAlgorithms.HmacSha512Signature);
 
             //Paylod
-            var token = new JwtSecurityToken( 
-                claims: claims, 
-                expires: DateTime.Now.AddDays(1), 
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds
                 );
 

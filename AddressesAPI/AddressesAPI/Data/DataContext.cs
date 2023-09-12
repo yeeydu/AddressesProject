@@ -14,5 +14,6 @@ namespace AddressesAPI.Data
         }
         // DBset Property // representation of the table EF
         public DbSet<Address> Addresses => Set<Address>();
+        public DbSet<User> Users => Set<User>();
     }
 }
