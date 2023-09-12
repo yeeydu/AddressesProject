@@ -8,7 +8,7 @@ npm run dev
 
 ### Installed Packages:
 
-npm i --save bootstrap @popperjs/core
+npm install react-bootstrap bootstrap
 npm i --save-dev sass
 
 

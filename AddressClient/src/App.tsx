@@ -1,14 +1,17 @@
- 
-import './index.css'
+import "./index.css";
+import Footer from "./layout/Footer";
+import Navbar from "./layout/Navbar";
 
 function App() {
-
-
   return (
-    <div className='container'>
-      <h1>Hello World</h1>
+    <div>
+      <Navbar />
+      <div className="container">
+        <h1>Hello World</h1>
+      </div>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
