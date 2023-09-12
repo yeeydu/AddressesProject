@@ -1,10 +1,15 @@
 ﻿global using AddressesAPI.Models;
 using AddressesAPI.Dtos.Address;
 using AddressesAPI.Services.AddressService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AddressesAPI.Controllers
 {
+
+    /// <summary>
+    /// API controller inmplements the Address Service 
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class AddressController : ControllerBase
@@ -16,7 +21,7 @@ namespace AddressesAPI.Controllers
             _addressService = addressService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("GetAll"), Authorize]
         public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> Get()
         {
             return Ok(await _addressService.GetAllAddresses());

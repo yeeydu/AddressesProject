@@ -2,6 +2,10 @@
 
 namespace AddressesAPI.Data
 {
+
+    /// <summary>
+    /// Set database with Entityframwork
+    /// </summary>
     public class DataContext: DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)

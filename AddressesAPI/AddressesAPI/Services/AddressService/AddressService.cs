@@ -5,6 +5,10 @@ using AddressesAPI.Models;
 
 namespace AddressesAPI.Services.AddressService
 {
+
+    /// <summary>
+    /// Address Service 
+    /// </summary>
     public class AddressService : IAddressService
     {
         //private static List<Address> addresses = new List<Address>()
