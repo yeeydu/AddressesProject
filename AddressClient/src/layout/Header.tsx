@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-function ColorSchemesExample() {
+function Header() {
   return (
     <>
       <Navbar bg="light" data-bs-theme="light">
@@ -36,4 +36,4 @@ function ColorSchemesExample() {
   );
 }
 
-export default ColorSchemesExample;
+export default Header;

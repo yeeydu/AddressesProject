@@ -1,13 +1,15 @@
+import TableList from "./components/TableList";
 import "./index.css";
 import Footer from "./layout/Footer";
-import Navbar from "./layout/Navbar";
+import Header from "./layout/Header";
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <Header />
       <div className="container">
-        <h1>Hello World</h1>
+        <h2 className="text-center m-5">Addresses Records</h2>
+        <TableList/>
       </div>
       <Footer />
     </div>
