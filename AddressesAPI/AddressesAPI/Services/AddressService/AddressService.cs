@@ -7,7 +7,7 @@ namespace AddressesAPI.Services.AddressService
 {
 
     /// <summary>
-    /// Address Service 
+    /// Address Service implements IddressService interface
     /// </summary>
     public class AddressService : IAddressService
     {
@@ -23,7 +23,11 @@ namespace AddressesAPI.Services.AddressService
             _mapper = mapper;
             _context = context;
         }
-
+        /// <summary>
+        /// Add a new address record with an increment ID 
+        /// </summary>
+        /// <param name="newAddress"></param>
+        /// <returns></returns>
         public async Task<ServiceResponse<List<GetAddressDto>>> AddAddress(AddAddressDto newAddress)
         {
             var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
@@ -36,7 +40,11 @@ namespace AddressesAPI.Services.AddressService
 
             return serviceResponse;
         }
-
+        /// <summary>
+        /// Service Delete method 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ServiceResponse<List<GetAddressDto>>> DeleteAddress(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
@@ -64,6 +72,11 @@ namespace AddressesAPI.Services.AddressService
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Service Get a Single address by its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ServiceResponse<GetAddressDto>> GetAddressById(int id)
         {
             var serviceResponse = new ServiceResponse<GetAddressDto>();
@@ -73,6 +86,10 @@ namespace AddressesAPI.Services.AddressService
 
         }
 
+        /// <summary>
+        /// Service Get all records method
+        /// </summary>
+        /// <returns></returns>
         public async Task<ServiceResponse<List<GetAddressDto>>> GetAllAddresses()
         {
             var serviceResponse = new ServiceResponse<List<GetAddressDto>>();
@@ -82,6 +99,11 @@ namespace AddressesAPI.Services.AddressService
             return serviceResponse;
         }
 
+        /// <summary>
+        /// Service Update method
+        /// </summary>
+        /// <param name="updatedAddress"></param>
+        /// <returns></returns>
         public async Task<ServiceResponse<GetAddressDto>> UpdateAddress(UpdateAddressDto updatedAddress)
         {
             var serviceResponse = new ServiceResponse<GetAddressDto>();

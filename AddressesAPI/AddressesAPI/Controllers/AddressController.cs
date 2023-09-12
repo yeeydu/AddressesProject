@@ -27,24 +27,24 @@ namespace AddressesAPI.Controllers
             return Ok(await _addressService.GetAllAddresses());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> GetSingle(int id)
         {
             return Ok(await _addressService.GetAddressById(id));
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> AddAddress(AddAddressDto newAddress)
         {
-         
+
             return Ok(await _addressService.AddAddress(newAddress));
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> UpdateAddress(UpdateAddressDto updatedAddress)
         {
             var response = await _addressService.UpdateAddress(updatedAddress);
-            if(response.Data is null) 
+            if (response.Data is null)
             {
                 return NotFound(response);
             }
@@ -52,7 +52,7 @@ namespace AddressesAPI.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> DeleteAddress(int id)
         {
             var response = await _addressService.DeleteAddress(id);

@@ -2,6 +2,9 @@
 
 namespace AddressesAPI.Services.UserService
 {
+    /// <summary>
+    /// User Service implementing User interface
+    /// </summary>
     public class UserService : IUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;

@@ -3,6 +3,9 @@ using AddressesAPI.Models;
 
 namespace AddressesAPI.Services.AddressService
 {
+    /// <summary>
+    /// Address Service Interface with it methods
+    /// </summary>
     public interface IAddressService
     {
         Task<ServiceResponse<List<GetAddressDto>>> GetAllAddresses();

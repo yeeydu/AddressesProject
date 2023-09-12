@@ -27,10 +27,7 @@ namespace AddressesAPI.Controllers
             _userService = userService;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet, Authorize]
         public ActionResult<string> Get()
         {
@@ -43,7 +40,7 @@ namespace AddressesAPI.Controllers
 
 
         /// <summary>
-        /// 
+        /// Register User method 
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -59,6 +56,12 @@ namespace AddressesAPI.Controllers
             return Ok(user);
         }
 
+
+        /// <summary>
+        /// Login user and Token creator method
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public ActionResult<User> Login(UserDto request)
         {
