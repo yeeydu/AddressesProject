@@ -1,38 +1,43 @@
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 function Header() {
   return (
-    <>
-      <Navbar bg="light" data-bs-theme="light">
-        <Container>
-          <Navbar.Brand href="#home">Address App</Navbar.Brand>
-          <Nav className="menu">
-            <Nav.Link href="#home">Home</Nav.Link>
-
-            <Form>
-              <Row>
-                <Col xs="auto">
-                  <Form.Control
-                    type="text"
-                    placeholder="Search"
-                    className=" mr-sm-2"
-                  />
-                </Col>
-                <Col xs="auto">
-                  <Button type="submit">Search</Button>
-                </Col>
-              </Row>
+    <div className="mb-5">
+      <Navbar
+        expand="lg"
+        className="bg-body-tertiary"
+        bg="light"
+        data-bs-theme="light"
+        fixed="top"
+      >
+        <Container fluid>
+          <Navbar.Brand href="#">Address App</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            >
+              <Nav.Link href="#action1">Home</Nav.Link>
+            </Nav>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
             </Form>
-          </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
-    </>
+    </div>
   );
 }
 

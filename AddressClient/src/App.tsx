@@ -8,7 +8,7 @@ function App() {
     <div>
       <Header />
       <div className="container">
-        <h2 className="text-center m-5">Addresses Records</h2>
+        <h2 className="text-center m-5 pt-5">Addresses Records</h2>
         <TableList/>
       </div>
       <Footer />
