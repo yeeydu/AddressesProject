@@ -10,7 +10,7 @@ npm run dev
 
 npm install react-bootstrap bootstrap
 npm i --save-dev sass
-
+npm install axios
 
 
 
