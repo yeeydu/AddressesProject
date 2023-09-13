@@ -14,7 +14,7 @@ function Header(props: { children: any }) {
         data-bs-theme="light"
         fixed="top"
       >
-        <Container fluid>
+        <Container>
           <Navbar.Brand href="/"><img src="./public/assets/address.svg" width={30}/> </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
