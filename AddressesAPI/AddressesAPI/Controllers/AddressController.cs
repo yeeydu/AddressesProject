@@ -21,7 +21,7 @@ namespace AddressesAPI.Controllers
             _addressService = addressService;
         }
 
-        [HttpGet("GetAll"), Authorize]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> Get()
         {
             return Ok(await _addressService.GetAllAddresses());

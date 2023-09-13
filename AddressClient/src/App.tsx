@@ -1,17 +1,21 @@
-import TableList from "./components/TableList";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div>
-      <Header />
-      <div className="container">
-        <h2 className="text-center m-5 pt-5">Addresses Records</h2>
-        <TableList/>
-      </div>
-      <Footer />
+      <BrowserRouter>
+        <Header>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            
+          </Routes>
+          <Footer />
+        </Header>
+      </BrowserRouter>
     </div>
   );
 }

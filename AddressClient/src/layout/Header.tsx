@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-function Header() {
+function Header(props: { children: any }) {
   return (
     <div className="mb-5">
       <Navbar
@@ -15,7 +15,7 @@ function Header() {
         fixed="top"
       >
         <Container fluid>
-          <Navbar.Brand href="#">Address App</Navbar.Brand>
+          <Navbar.Brand href="/">Address App</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -23,7 +23,7 @@ function Header() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="#action1">Home</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
             </Nav>
             <Form className="d-flex">
               <Form.Control
@@ -37,6 +37,7 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {props.children}
     </div>
   );
 }
