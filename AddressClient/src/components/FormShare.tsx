@@ -51,7 +51,7 @@ function FormShare(props: any) {
               <Form.Label>Parish</Form.Label>
               <Form.Control
                 type="text"
-                name="lastName"
+                name="parish"
                 value={values.parish}
                 onChange={handleChange}
                 isValid={touched.parish && !errors.parish}
@@ -68,7 +68,7 @@ function FormShare(props: any) {
                   type="text"
                   placeholder="Username"
                   aria-describedby="inputGroupPrepend"
-                  name="username"
+                  name="council"
                   value={values.council}
                   onChange={handleChange}
                   isInvalid={!!errors.council}
@@ -84,7 +84,7 @@ function FormShare(props: any) {
               <Form.Control
                 type="text"
                 placeholder="State"
-                name="state"
+                name="district"
                 value={values.district}
                 onChange={handleChange}
                 isInvalid={!!errors.district}
