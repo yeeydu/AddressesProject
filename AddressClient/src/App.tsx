@@ -3,6 +3,7 @@ import "./index.css";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import Home from "./components/Home";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <BrowserRouter>
         <Header>
           <Routes>
-            <Route path='/' element={<Home />} />
-            
+            <Route path="/" element={<Home />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </Header>
