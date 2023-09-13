@@ -5,8 +5,20 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import * as formik from "formik";
 import * as yup from "yup";
+import { baseUrl } from "../Shared";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-function FormShare(props: any) {
+function AddAddress() {
+  // const [street, setStreet] = useState("");
+  // const [parish, setParish] = useState("");
+  // const [council, setCouncil] = useState("");
+  // const [postalCode, setPostalCode] = useState("");
+  // const [district, setDistric] = useState("");
+  // const [country, setCountry] = useState("");
+
+  let navigate = useNavigate();
   const { Formik } = formik;
 
   const schema = yup.object().shape({
@@ -15,22 +27,56 @@ function FormShare(props: any) {
     council: yup.string().required(),
     country: yup.string().required(),
     district: yup.string().required(),
-    zip: yup.string().required(),
-   // terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
+    postalCode: yup.string().required(),
+    // terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
   });
 
+  const submitData = () => {
+    const url = baseUrl;
+    axios
+      .post(
+        url,
+        { street, parish, council, district, country, postalCode},
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      )
+      .catch((error) => {
+        console.log(error.response);
+      })
+      .then(() => {
+        navigate("/");
+      });
+    console.log(`new item created `);
+  };
+
+  // const handleChange = (e: any) => {
+  //   setStreet(e.target.value);
+  //   setParish(e.target.value);
+  //   setCouncil(e.target.value);
+  //   setPostalCode(e.target.value);
+  //   setDistric(e.target.value);
+  //   setCountry(e.target.value);
+  // };
+
   return (
+    <>
+    <div>
+      <h3 className="text-center mb-5">Add Address</h3>
+    </div>
     <Formik
       validationSchema={schema}
-      onSubmit={console.log}
+      onSubmit={submitData}
       initialValues={{
-        street: "Avenida",
-        parish: "Paranhos",
-        council: "Porto",
-        country: "Portugal",
-        district: "Porto",
-        zip: "0000",
-        terms: false,
+        street: "",
+        parish: "",
+        council: "",
+        country: "",
+        district: "",
+        postalCode: "",
+        // terms: false,
       }}
     >
       {({ handleSubmit, handleChange, values, touched, errors }) => (
@@ -41,6 +87,7 @@ function FormShare(props: any) {
               <Form.Control
                 type="text"
                 name="street"
+                placeholder="Street"
                 value={values.street}
                 onChange={handleChange}
                 isValid={touched.street && !errors.street}
@@ -52,12 +99,15 @@ function FormShare(props: any) {
               <Form.Control
                 type="text"
                 name="parish"
+                placeholder="Parish"
                 value={values.parish}
                 onChange={handleChange}
-                isValid={touched.parish && !errors.parish}
+                isInvalid={!!errors.parish}
               />
-
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                {errors.parish}
+              </Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
@@ -66,7 +116,7 @@ function FormShare(props: any) {
               <InputGroup hasValidation>
                 <Form.Control
                   type="text"
-                  placeholder="Username"
+                  placeholder="council"
                   aria-describedby="inputGroupPrepend"
                   name="council"
                   value={values.council}
@@ -78,12 +128,12 @@ function FormShare(props: any) {
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
-         
+
             <Form.Group as={Col} md="3" controlId="validationFormik04">
               <Form.Label>District</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="State"
+                placeholder="district"
                 name="district"
                 value={values.district}
                 onChange={handleChange}
@@ -98,19 +148,19 @@ function FormShare(props: any) {
               <Form.Control
                 type="text"
                 placeholder="Zip"
-                name="zip"
-                value={values.zip}
+                name="postalCode"
+                value={values.postalCode}
                 onChange={handleChange}
-                isInvalid={!!errors.zip}
+                isInvalid={!!errors.postalCode}
               />
 
               <Form.Control.Feedback type="invalid">
-                {errors.zip}
+                {errors.postalCode}
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
-          <Form.Group as={Col} md="3" controlId="validationFormik03">
+            <Form.Group as={Col} md="3" controlId="validationFormik03">
               <Form.Label>Country</Form.Label>
               <Form.Control
                 type="text"
@@ -138,11 +188,15 @@ function FormShare(props: any) {
               id="validationFormik0"
             />
           </Form.Group> */}
-          <Button variant="outline-info" type="submit">Submit form</Button>
+          <Button variant="outline-info" type="submit">
+            Submit form
+          </Button>
         </Form>
       )}
     </Formik>
+  </>
   );
 }
 
-export default FormShare;
+export default AddAddress;
+
