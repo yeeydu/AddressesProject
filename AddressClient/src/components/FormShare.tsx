@@ -1,22 +1,22 @@
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
-import * as formik from 'formik';
-import * as yup from 'yup';
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
+import * as formik from "formik";
+import * as yup from "yup";
 
 function FormShare(props: any) {
   const { Formik } = formik;
 
   const schema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
-    username: yup.string().required(),
-    city: yup.string().required(),
-    state: yup.string().required(),
+    street: yup.string().required(),
+    parish: yup.string().required(),
+    council: yup.string().required(),
+    country: yup.string().required(),
+    district: yup.string().required(),
     zip: yup.string().required(),
-    terms: yup.bool().required().oneOf([true], 'Terms must be accepted'),
+   // terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
   });
 
   return (
@@ -24,88 +24,73 @@ function FormShare(props: any) {
       validationSchema={schema}
       onSubmit={console.log}
       initialValues={{
-        firstName: 'Mark',
-        lastName: 'Otto',
-        username: '',
-        city: '',
-        state: '',
-        zip: '',
+        street: "Avenida",
+        parish: "Paranhos",
+        council: "Porto",
+        country: "Portugal",
+        district: "Porto",
+        zip: "0000",
         terms: false,
       }}
     >
       {({ handleSubmit, handleChange, values, touched, errors }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormik01">
-              <Form.Label>First name</Form.Label>
+            <Form.Group as={Col} md="6" controlId="validationFormik01">
+              <Form.Label>Street</Form.Label>
               <Form.Control
                 type="text"
-                name="firstName"
-                value={values.firstName}
+                name="street"
+                value={values.street}
                 onChange={handleChange}
-                isValid={touched.firstName && !errors.firstName}
+                isValid={touched.street && !errors.street}
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationFormik02">
-              <Form.Label>Last name</Form.Label>
+              <Form.Label>Parish</Form.Label>
               <Form.Control
                 type="text"
                 name="lastName"
-                value={values.lastName}
+                value={values.parish}
                 onChange={handleChange}
-                isValid={touched.lastName && !errors.lastName}
+                isValid={touched.parish && !errors.parish}
               />
 
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
+          </Row>
+          <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="validationFormikUsername">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Council</Form.Label>
               <InputGroup hasValidation>
-                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 <Form.Control
                   type="text"
                   placeholder="Username"
                   aria-describedby="inputGroupPrepend"
                   name="username"
-                  value={values.username}
+                  value={values.council}
                   onChange={handleChange}
-                  isInvalid={!!errors.username}
+                  isInvalid={!!errors.council}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.username}
+                  {errors.council}
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationFormik03">
-              <Form.Label>City</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="City"
-                name="city"
-                value={values.city}
-                onChange={handleChange}
-                isInvalid={!!errors.city}
-              />
-
-              <Form.Control.Feedback type="invalid">
-                {errors.city}
-              </Form.Control.Feedback>
-            </Form.Group>
+         
             <Form.Group as={Col} md="3" controlId="validationFormik04">
-              <Form.Label>State</Form.Label>
+              <Form.Label>District</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="State"
                 name="state"
-                value={values.state}
+                value={values.district}
                 onChange={handleChange}
-                isInvalid={!!errors.state}
+                isInvalid={!!errors.district}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.state}
+                {errors.district}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="3" controlId="validationFormik05">
@@ -124,7 +109,24 @@ function FormShare(props: any) {
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
-          <Form.Group className="mb-3">
+          <Row className="mb-3">
+          <Form.Group as={Col} md="3" controlId="validationFormik03">
+              <Form.Label>Country</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Country"
+                name="country"
+                value={values.country}
+                onChange={handleChange}
+                isInvalid={!!errors.country}
+              />
+
+              <Form.Control.Feedback type="invalid">
+                {errors.country}
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Row>
+          {/* <Form.Group className="mb-3">
             <Form.Check
               required
               name="terms"
@@ -135,7 +137,7 @@ function FormShare(props: any) {
               feedbackType="invalid"
               id="validationFormik0"
             />
-          </Form.Group>
+          </Form.Group> */}
           <Button type="submit">Submit form</Button>
         </Form>
       )}
