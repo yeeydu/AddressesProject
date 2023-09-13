@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import TableList from "../components/TableList";
+import Addresse from "./Addresses";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
           Add
         </Button>
       </div>
-      <TableList />
+      <Addresse />
     </div>
   );
 }

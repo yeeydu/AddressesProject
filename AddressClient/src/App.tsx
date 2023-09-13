@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import FormShare from "./components/FormShare";
 
+
 function App() {
   return (
     <div>
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/add" element={<FormShare />} />
+            <Route path="/address/:id" element={<FormShare/>} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
