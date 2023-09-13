@@ -12,16 +12,16 @@ interface Props {
 }
 
 export default function Fetch(url, { method, headers, body } = {}) {
-
   const [data, setData] = useState<[]>([]);
   const [errorStatus, setErrorStatus] = useState<string>("");
 
-  const url  = API_URL;
+  const url = API_URL;
 
   axios.get(API_URL).then((res) => {
     const persons = res.data;
     this.setState({ persons });
   });
 
-  return <div></div>;
+   //returning destructuring objects properties
+   return { data, errorStatus };
 }
