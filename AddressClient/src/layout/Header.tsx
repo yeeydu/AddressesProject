@@ -15,7 +15,7 @@ function Header(props: { children: any }) {
         fixed="top"
       >
         <Container fluid>
-          <Navbar.Brand href="/">Address App</Navbar.Brand>
+          <Navbar.Brand href="/"><img src="./public/assets/address.svg" width={30}/> </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
