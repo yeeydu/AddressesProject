@@ -4,7 +4,8 @@ import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
-import FormShare from "./components/FormShare";
+import EditAddress from "./components/EditAddress";
+import AddAddress from "./components/AddAddress";
 
 
 function App() {
@@ -14,8 +15,8 @@ function App() {
         <Header>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/add" element={<FormShare />} />
-            <Route path="/address/:id" element={<FormShare/>} />
+            <Route path="/add" element={<AddAddress />} />
+            <Route path="/address/:id" element={<EditAddress/>} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
