@@ -9,6 +9,11 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add CORS Policy
+var policyName = "_myAllowSpecificOrigins";
+builder.Services.AddCors((c) => c.AddPolicy("cors", x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+//---
+
 // Add services to the container.
 
 // Add Database ConnectionString 
@@ -65,6 +70,9 @@ app.UseHttpsRedirection();
 
 // Add middlewer 
 app.UseAuthentication();
+
+// Cors Policy
+app.UseCors("cors");
 
 app.UseAuthorization();
 

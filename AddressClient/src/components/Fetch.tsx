@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import axios from "axios";
 
+/*
 interface Props {
   id: number;
   street: string;
@@ -10,18 +11,34 @@ interface Props {
   district: string;
   country: string;
 }
+*/
 
-export default function Fetch(url, { method, headers, body } = {}) {
-  const [data, setData] = useState<[]>([]);
-  const [errorStatus, setErrorStatus] = useState<string>("");
+export default function Fetch(url : any, {method, headers,  }: any = {}) {
 
-  const url = API_URL;
+  const [data, setData] = useState();
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(true);
 
-  axios.get(API_URL).then((res) => {
-    const persons = res.data;
-    this.setState({ persons });
-  });
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(
+          url,  {
+            method: method,
+            headers: headers,
+           // body: body,
+        });
+        setData(response.data);
+      } catch (error: any) {
+        setError(error); 
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
 
    //returning destructuring objects properties
-   return { data, errorStatus };
+   return { data, error , loading};
 }
