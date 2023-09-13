@@ -4,6 +4,7 @@ import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
+import FormShare from "./components/FormShare";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/add" element={<FormShare />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
