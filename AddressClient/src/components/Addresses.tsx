@@ -4,7 +4,7 @@ import { baseUrl } from "../Shared";
 import { Button } from "react-bootstrap";
 import { useParams,  Link } from "react-router-dom";
 
-function TableList() {
+function Addresses() {
 
   const { id } = useParams()
   
@@ -82,4 +82,4 @@ function TableList() {
   );
 }
 
-export default TableList;
+export default Addresses;

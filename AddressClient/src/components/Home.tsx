@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import Addresse from "./Addresses";
+import Addresses from "./Addresses";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
           Add
         </Button>
       </div>
-      <Addresse />
+      <Addresses />
     </div>
   );
 }
