@@ -1,14 +1,15 @@
 import Table from "react-bootstrap/Table";
 
 function TableList() {
+  //striped bordered
   return (
-    <Table striped bordered hover>
+    <Table  hover> 
       <thead>
         <tr>
           <th>Street</th>
-          <th>City</th>
           <th>Parish</th>
           <th>Council</th>
+          <th>Zip</th>
           <th>District</th>
           <th>Country</th>
         </tr>

@@ -138,7 +138,7 @@ function FormShare(props: any) {
               id="validationFormik0"
             />
           </Form.Group> */}
-          <Button type="submit">Submit form</Button>
+          <Button variant="outline-info" type="submit">Submit form</Button>
         </Form>
       )}
     </Formik>

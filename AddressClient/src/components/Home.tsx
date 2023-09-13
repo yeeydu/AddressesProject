@@ -7,8 +7,8 @@ export default function Home() {
 
 
   return (
-    <div className="container">
-      <h2 className="text-center m-5 pt-5">Addresses Records</h2>
+    <div className="">
+      <h2 className="text-center ">Addresses Records</h2>
       <div className="text-right mb-2">
         <Button variant="outline-info" onClick={()=> navigate('/add')}>
           Add
