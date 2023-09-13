@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 
 function Header(props: { children: any }) {
   return (
-    <div className="mb-5">
+    <div className="">
       <Navbar
         expand="lg"
         className="bg-body-tertiary"
