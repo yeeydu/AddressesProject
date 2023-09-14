@@ -104,19 +104,19 @@ namespace AddressesAPI.Services.AddressService
         /// </summary>
         /// <param name="updatedAddress"></param>
         /// <returns></returns>
-        public async Task<ServiceResponse<GetAddressDto>> UpdateAddress(UpdateAddressDto updatedAddress)
+        public async Task<ServiceResponse<GetAddressDto>> UpdateAddress(UpdateAddressDto updatedAddress, int id)
         {
             var serviceResponse = new ServiceResponse<GetAddressDto>();
             try
             {
-                var dbAddress = await _context.Addresses.FirstOrDefaultAsync(c => c.Id == updatedAddress.Id);
+                var dbAddress = await _context.Addresses.FirstOrDefaultAsync(c => c.Id == id);
                 if (dbAddress == null)
                 {
-                    throw new Exception($"Address id {updatedAddress.Id} was not found");
+                    throw new Exception($"Address id {id} was not found");
                 }
 
                 dbAddress.Street = updatedAddress.Street;
-                dbAddress.District = updatedAddress.District;
+                dbAddress.District = updatedAddress.District; 
                 dbAddress.Country = updatedAddress.Country;
                 dbAddress.Parish = updatedAddress.Parish;
                 dbAddress.Council = updatedAddress.Council;
@@ -135,6 +135,11 @@ namespace AddressesAPI.Services.AddressService
 
 
             return serviceResponse;
+        }
+
+        public Task<ServiceResponse<GetAddressDto>> UpdateAddress(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

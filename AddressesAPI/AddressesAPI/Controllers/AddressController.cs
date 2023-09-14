@@ -40,10 +40,10 @@ namespace AddressesAPI.Controllers
             return Ok(await _addressService.AddAddress(newAddress));
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> UpdateAddress(UpdateAddressDto updatedAddress)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ServiceResponse<List<GetAddressDto>>>> UpdateAddress(UpdateAddressDto updatedAddress, int id )
         {
-            var response = await _addressService.UpdateAddress(updatedAddress);
+            var response = await _addressService.UpdateAddress(updatedAddress, id);
             if (response.Data is null)
             {
                 return NotFound(response);

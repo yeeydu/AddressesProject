@@ -12,8 +12,7 @@ npm install react-bootstrap bootstrap
 npm i --save-dev sass
 npm install axios
 npm install react-router-dom
-npm install formik --save
-npm i yup
+npm i sweetalert
 
 
 # React + TypeScript + Vite
