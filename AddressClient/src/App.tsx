@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import EditAddress from "./components/EditAddress";
 import AddAddress from "./components/AddAddress";
+import DeleteAddress from "./components/DeleteAddress";
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/add" element={<AddAddress />} />
-            <Route path="/address/:id" element={<EditAddress/>} />
+            <Route path="/edit/:id" element={<EditAddress/>} />
+            <Route path="/delete/:id" element={<DeleteAddress/>} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

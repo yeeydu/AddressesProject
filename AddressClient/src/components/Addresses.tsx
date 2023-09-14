@@ -1,21 +1,23 @@
 import Table from "react-bootstrap/Table";
-import fetch from "./Fetch";
+import fetchHook from "./Fetch";
 import { baseUrl } from "../Shared";
 import { Button } from "react-bootstrap";
-import { useParams,  Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 function Addresses() {
+  const [info, setInfo] = useState();
+  const { id } = useParams();
 
-  const { id } = useParams()
-  
   // API baseUrl
-  const url = baseUrl + "/getall";
+  const url = baseUrl;
   //Get API use custom fetch component | data is source:{data} the property
   const {
     data: { data } = {},
     error,
     loading,
-  } = fetch(url, {
+  } = fetchHook(baseUrl + "/getall", {
     method: "GET",
     headers: {
       //"Content-Type": "application/json",
@@ -23,17 +25,30 @@ function Addresses() {
     },
   });
 
-  function deleteAddress() {
-    const url = baseUrl + id;
-    fetch(url, {
-        method: 'DELETE',
-        headers: {
-            //'Content-Type': 'application/json', 
-            //Authorization: 'Bearer ' + localStorage.getItem('access'),
+  /*
+   if(location?.state){
+          Swal.fire({
+            icon: "success",
+            title: location?.state?.message,
+          });
+          redirect(location.pathname, {replace: true});
         }
+        */
+
+  // const deleteAddress = fetchHook(url +"/"+ id, {
+  //   method: "DELETE",
+  //   headers: {
+  //     //"Content-Type": "application/json",
+  //     //Authorization: "Bearer ",
+  //   },
+  // });
+
+  const deleteAddress = (id: any) => {
+    axios.delete(url + "/" + id).then((getData) => {
+      setInfo(getData.data);
     });
-  }
- 
+    console.log(`item ${id} deleted `);
+  };
 
   //we can use "striped bordered" style
   return (
@@ -62,14 +77,20 @@ function Addresses() {
                     <td>{address.district}</td>
                     <td>{address.country}</td>
                     <td>
-                    <Link to={"/address/" + address.id}>
-                      <Button   variant="outline-secondary" size="sm">
-                        Edit
-                      </Button>{" "}
+                      <Link to={"/edit/" + address.id}>
+                        <Button variant="outline-secondary" size="sm">
+                          Edit
+                        </Button>{" "}
                       </Link>
-                      <Button onClick={deleteAddress} variant="outline-danger" size="sm">
-                        Delete
-                      </Button>
+                      <Link to={"/delete/" + address.id}>
+                        <Button
+                          onClick={deleteAddress}
+                          variant="outline-danger"
+                          size="sm"
+                        >
+                          Delete
+                        </Button>
+                      </Link>
                     </td>
                   </tr>
                 );

@@ -1,186 +1,216 @@
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
-import * as formik from "formik";
-import * as yup from "yup";
 import { baseUrl } from "../Shared";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { IAddress } from "../types/addressTypes";
+import axios from "axios";
 
 function EditAddress() {
-
-  const[address, setAddress]= useState({});
-  // const[parish, setParish]= useState("");
-  // const[council, setCouncil]= useState("");
-  // const[postalCode, setPostoalCode]= useState("");
-  // const[district, setDistric]= useState("");
-  // const[country, setCountry]= useState("");
-  
-  const { Formik } = formik;
-
-  const schema = yup.object().shape({
-    street: yup.string().required(),
-    parish: yup.string().required(),
-    council: yup.string().required(),
-    country: yup.string().required(),
-    district: yup.string().required(),
-    zip: yup.string().required(),
-   // terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
+  const [address, setAddress] = useState<Partial<IAddress>>({
+    street: "",
+    postal_code: "",
+    parish: "",
+    council: "",
+    district: "",
+    country: "",
   });
 
-  const { id } = useParams()
-  // API baseUrl
-  const url = baseUrl + "/address" +id;
-  //Get API use custom fetch component | data is source:{data} the property
-  const {
-    data: { data } = {},
-    error,
-    loading,
-  } = fetch(url, {
-    method: "GET",
-    headers: {
-      //"Content-Type": "application/json",
-      //Authorization: "Bearer ",
-    },
-    
-  });
-  setAddress(data.data);
+  let navigate = useNavigate();
 
-  console.log(data.data)
+  const { id } = useParams();
 
-  const handleChange = (event) => {
-     setAddress()
-  }
-
-const handleSubmit = (e: any) =>{
-  e.preventDefault();
-}
+  useEffect(()=>{
+    const url = baseUrl + "/" + id;
+    axios.get<IAddress>(url).then(response => setAddress({
+      street: response.data.street,
+      council: response.data.council,
+      country: response.data.country,
+      district: response.data.district,
+      parish: response.data.parish,
+      postal_code: response.data.postal_code,
+    }))
+  },[])
  
+
+
+  const submitData = () => {
+    if (
+      address.street === "" ||
+      address.council === "" ||
+      address.country === "" ||
+      address.district === "" ||
+      address.parish === "" ||
+      address.postal_code === ""
+    ) {
+      alert("Enter Values");
+      return;
+    }
+    const data: Partial<IAddress> = {
+      id: address.id,
+      street: address.street,
+      council: address.council,
+      country: address.country,
+      district: address.district,
+      parish: address.parish,
+      postal_code: address.postal_code,
+    };
+
+    const url = baseUrl + "/" + id;
+    axios
+      .put(url, data, {
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+      .then((response) => { navigate("/", { state: { message: "Address edited succesfully" } });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    console.log(`Item edited `);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress({
+      ...address,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
-    <Formik
-      validationSchema={schema}
-      onSubmit={console.log}
-      initialValues={{
-        street: "",
-        parish: "",
-        council: "",
-        country: "",
-        district: "",
-        zip: "",
-        terms: false,
-      }}
-    >
-      {({ handleSubmit, handleChange, values, touched, errors }) => (
-        <Form noValidate onSubmit={handleSubmit}>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationFormik01">
-              <Form.Label>Street</Form.Label>
-              <Form.Control
-                type="text"
-                name="street"
-                value={data.street}
-                onChange={handleChange}
-                isValid={touched.street && !errors.street}
-              />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik02">
-              <Form.Label>Parish</Form.Label>
-              <Form.Control
-                type="text"
-                name="parish"
-                value={values.parish}
-                onChange={handleChange}
-                isValid={touched.parish && !errors.parish}
-              />
-
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormikUsername">
-              <Form.Label>Council</Form.Label>
-              <InputGroup hasValidation>
-                <Form.Control
-                  type="text"
-                  placeholder="Council"
-                  aria-describedby="inputGroupPrepend"
-                  name="council"
-                  value={values.council}
-                  onChange={handleChange}
-                  isInvalid={!!errors.council}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.council}
-                </Form.Control.Feedback>
-              </InputGroup>
-            </Form.Group>
-         
-            <Form.Group as={Col} md="3" controlId="validationFormik04">
-              <Form.Label>District</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="District"
-                name="district"
-                value={values.district}
-                onChange={handleChange}
-                isInvalid={!!errors.district}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.district}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group as={Col} md="3" controlId="validationFormik05">
-              <Form.Label>Zip</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Zip"
-                name="zip"
-                value={values.zip}
-                onChange={handleChange}
-                isInvalid={!!errors.zip}
-              />
-
-              <Form.Control.Feedback type="invalid">
-                {errors.zip}
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3">
-          <Form.Group as={Col} md="3" controlId="validationFormik03">
-              <Form.Label>Country</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Country"
-                name="country"
-                value={values.country}
-                onChange={handleChange}
-                isInvalid={!!errors.country}
-              />
-
-              <Form.Control.Feedback type="invalid">
-                {errors.country}
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Row>
-          {/* <Form.Group className="mb-3">
-            <Form.Check
-              required
-              name="terms"
-              label="Agree to terms and conditions"
+    <div className="container">
+      <div>
+        <h3 className="text-center mb-5">Edit Address</h3>
+      </div>
+      <Form>
+        <Row className="mb-3">
+          <Form.Group
+            className="mb-3"
+            as={Col}
+            md="7"
+            controlId="formBasicEmail"
+          >
+            <Form.Label>Street</Form.Label>
+            <Form.Control
+              type="text"
+              name="street"
+              placeholder="Street"
               onChange={handleChange}
-              isInvalid={!!errors.terms}
-              feedback={errors.terms}
-              feedbackType="invalid"
-              id="validationFormik0"
+              value={address.street || ""}
             />
-          </Form.Group> */}
-          <Button variant="outline-info" type="submit">Submit form</Button>
-        </Form>
-      )}
-    </Formik>
+            <Form.Text className="text-muted">
+              We'll never share your Address
+            </Form.Text>
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group
+            className="mb-3"
+            as={Col}
+            md="4"
+            controlId="formBasicPassword"
+          >
+            <Form.Label>Parish</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Parish"
+              aria-describedby="inputGroupPrepend"
+              name="parish"
+              required
+              onChange={handleChange}
+              value={address.parish || ""}
+            />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group
+            className="mb-3"
+            as={Col}
+            md="4"
+            controlId="formBasicText"
+          >
+            <Form.Label>District</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="district"
+              name="district"
+              onChange={handleChange}
+              required
+              value={address.district || ""}
+            />
+            <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group
+            className="mb-3"
+            as={Col}
+            md="4"
+            controlId="formBasicPassword"
+          >
+            <Form.Label>Council</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Porto"
+              name="council"
+              required
+              onChange={handleChange}
+              value={address.council || ""}
+            />
+            <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group
+            className="mb-3"
+            as={Col}
+            md="3"
+            controlId="formBasicPassword"
+          >
+            <Form.Label>Zip</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="1123-432"
+              name="postal_code"
+              onChange={handleChange}
+              required
+              value={address.postal_code || ""}
+            />
+            <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="4" controlId="formBasicEmail">
+            <Form.Label>Country</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Country"
+              name="country"
+              onChange={handleChange}
+              required
+              value={address.country || ""}
+            />
+
+            <Form.Text className="text-muted">...</Form.Text>
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          </Form.Group>
+          {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group> */}
+        </Row>
+        <Button variant="outline-info" type="submit" onClick={submitData}>
+          Submit
+        </Button>
+        <Button
+          variant="outline-info"
+          type="submit"
+          onClick={() => navigate("/")}
+        >
+          Back{" "}
+        </Button>
+      </Form>
+    </div>
   );
 }
 
