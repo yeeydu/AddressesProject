@@ -61,7 +61,7 @@ function AddAddress() {
       .catch((error) => {
         console.log(error);
       });
-    navigate("/");
+    //navigate("/");
     console.log(`new item created `);
   };
 
