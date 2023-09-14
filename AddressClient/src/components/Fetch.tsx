@@ -1,6 +1,12 @@
 import  { useEffect, useState } from "react";
 import axios from "axios";
 
+/**
+   * A unuse custom component to fetch api
+   *
+   * @ignore
+   */
+
 export default function Fetch(url : any, {method, headers,  }: any = {}) {
 
   const [data, setData] = useState();

@@ -1,15 +1,18 @@
 import Button from "react-bootstrap/Button";
 import { baseUrl } from "../Shared";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+/**
+ *  Delete component with a confirm message
+ */
 export default function DeleteAddress() {
   let navigate = useNavigate();
 
   const { id } = useParams();
 
   const submitData = () => {
-    const url = baseUrl+"/"+id;
+    const url = baseUrl + "/" + id;
     axios
       .delete(url, {
         headers: {
@@ -30,19 +33,21 @@ export default function DeleteAddress() {
     <div className="container">
       <div>
         <h3 className="text-center mb-5">Delete Address</h3>
-        <h4 className="text-center">Are you sure you want to delete this address?</h4>
+        <h4 className="text-center">
+          Are you sure you want to delete this address?
+        </h4>
       </div>
       <div className="col-md-12 text-center">
-      <Button  variant="outline-info" type="button" onClick={submitData}>
-        Submit
-      </Button>
-      <Button
-        variant="outline-info"
-        type="button"
-        onClick={() => navigate("/")}
+        <Button variant="outline-info" type="button" onClick={submitData}>
+          Submit
+        </Button>
+        <Button
+          variant="outline-info"
+          type="button"
+          onClick={() => navigate("/")}
         >
-        Back{" "}
-      </Button>
+          Back{" "}
+        </Button>
       </div>
     </div>
   );

@@ -8,6 +8,9 @@ import { IAddress } from "../types/addressTypes";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+/**
+ *  List of all records form API
+ */
 function Addresses() {
   let navigate = useNavigate();
   let location = useLocation();
@@ -16,17 +19,20 @@ function Addresses() {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
 
+  /**
+   *  fetch API
+   */
   const fetchAddressList = async () => {
     try {
       const response = await axios.get<IAddress[]>(baseUrl + "/getall");
       setAddress(response.data.data);
       setLoading(false);
-      if(location?.state){
+      if (location?.state) {
         Swal.fire({
-            icon: "success",
-            title: location?.state?.message
-        })
-        navigate(location.pathname, {replace: true});
+          icon: "success",
+          title: location?.state?.message,
+        });
+        navigate(location.pathname, { replace: true });
       }
     } catch (error: any) {
       setError(error);

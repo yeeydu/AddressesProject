@@ -8,7 +8,9 @@ import EditAddress from "./components/EditAddress";
 import AddAddress from "./components/AddAddress";
 import DeleteAddress from "./components/DeleteAddress";
 
-
+/** 
+ * This is the Routes for all page and methods
+ */
 function App() {
   return (
     <div>
