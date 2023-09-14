@@ -67,12 +67,12 @@ function EditAddress() {
         },
       })
       .then((response) => {
-        //navigate("/", { state: { message: "Address edited succesfully" } });
+        navigate("/", { state: { message: "Address edited succesfully" } }); 
       })
       .catch((error) => {
         console.log(error);
       });
-      navigate("/")
+      //navigate("/")
     console.log(`Item edited `);
   };
 

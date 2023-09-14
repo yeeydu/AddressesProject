@@ -12,8 +12,7 @@ npm install react-bootstrap bootstrap
 npm i --save-dev sass
 npm install axios
 npm install react-router-dom
-npm i sweetalert
-
+npm install sweetalert2
 
 # React + TypeScript + Vite
 

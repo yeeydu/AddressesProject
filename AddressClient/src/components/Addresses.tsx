@@ -1,31 +1,43 @@
 import Table from "react-bootstrap/Table";
-import fetchHook from "./Fetch";
+//import fetchHook from "./Fetch";
 import { baseUrl } from "../Shared";
 import { Button } from "react-bootstrap";
-import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { IAddress } from "../types/addressTypes";
 import axios from "axios";
-import { useState } from "react";
+import Swal from "sweetalert2";
 
 function Addresses() {
-  const [info, setInfo] = useState();
-  const { id } = useParams();
-
   let navigate = useNavigate();
+  let location = useLocation();
 
-  // API baseUrl
-  const url = baseUrl;
-  //Get API use custom fetch component | data is source:{data} the property
-  const {
-    data: { data } = {},
-    error,
-    loading,
-  } = fetchHook(baseUrl + "/getall", {
-    method: "GET",
-    headers: {
-      //"Content-Type": "application/json",
-      //Authorization: "Bearer ",
-    },
-  });
+  const [address, setAddress] = useState<IAddress[]>([]);
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(true);
+
+  const fetchAddressList = async () => {
+    try {
+      const response = await axios.get<IAddress[]>(baseUrl + "/getall");
+      setAddress(response.data.data);
+      setLoading(false);
+      if(location?.state){
+        Swal.fire({
+            icon: "success",
+            title: location?.state?.message
+        })
+        navigate(location.pathname, {replace: true});
+      }
+    } catch (error: any) {
+      setError(error);
+      setLoading(true);
+      console.log("an error ocurred");
+    }
+  };
+
+  useEffect(() => {
+    fetchAddressList();
+  }, []);
 
   //we can use "striped bordered" style
   return (
@@ -42,8 +54,8 @@ function Addresses() {
         </tr>
       </thead>
       <tbody>
-        {data
-          ? data
+        {address
+          ? address
               .map((address: any) => {
                 return (
                   <tr key={address.id}>

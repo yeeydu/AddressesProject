@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import { baseUrl } from "../Shared";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function DeleteAddress() {
