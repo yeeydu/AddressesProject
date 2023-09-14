@@ -49,12 +49,12 @@ function AddAddress() {
         },
       })
       .then((response) => {
-         navigate("/", {state: {message: "new Address added succesfully"}});
+        //navigate("/", {state: {message: "new Address added succesfully"}});
       })
       .catch((error) => {
         console.log(error);
       });
-
+      navigate("/")
     console.log(`new item created `);
   };
 
@@ -184,10 +184,10 @@ function AddAddress() {
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group> */}
         </Row>
-        <Button variant="outline-info" type="submit" onClick={submitData}>
+        <Button variant="outline-info" type="button" onClick={submitData}>
           Submit
         </Button>
-        <Button variant="outline-info" type="submit" onClick={()=> navigate("/")}>
+        <Button variant="outline-info" type="button" onClick={()=> navigate("/")}>
           Back{" "}
         </Button>
       </Form>

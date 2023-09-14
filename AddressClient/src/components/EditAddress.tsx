@@ -22,19 +22,20 @@ function EditAddress() {
 
   const { id } = useParams();
 
-  useEffect(()=>{
+  // fetch data to show in form
+  useEffect(() => {
     const url = baseUrl + "/" + id;
-    axios.get<IAddress>(url).then(response => setAddress({
-      street: response.data.street,
-      council: response.data.council,
-      country: response.data.country,
-      district: response.data.district,
-      parish: response.data.parish,
-      postal_code: response.data.postal_code,
-    }))
-  },[])
- 
-
+    axios.get<IAddress>(url).then((response) => {
+      setAddress({
+        street: response.data.data.street,
+        council: response.data.data.council,
+        country: response.data.data.country,
+        district: response.data.data.district,
+        parish: response.data.data.parish,
+        postal_code: response.data.data.postal_code,
+      });
+    });
+  }, []);
 
   const submitData = () => {
     if (
@@ -65,16 +66,18 @@ function EditAddress() {
           "Content-type": "application/json",
         },
       })
-      .then((response) => { navigate("/", { state: { message: "Address edited succesfully" } });
+      .then((response) => {
+        //navigate("/", { state: { message: "Address edited succesfully" } });
       })
       .catch((error) => {
         console.log(error);
       });
-
+      navigate("/")
     console.log(`Item edited `);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     setAddress({
       ...address,
       [event.target.name]: event.target.value,
@@ -86,7 +89,7 @@ function EditAddress() {
       <div>
         <h3 className="text-center mb-5">Edit Address</h3>
       </div>
-      <Form>
+      <Form id="form">
         <Row className="mb-3">
           <Form.Group
             className="mb-3"
@@ -101,10 +104,9 @@ function EditAddress() {
               placeholder="Street"
               onChange={handleChange}
               value={address.street || ""}
+              required
             />
-            <Form.Text className="text-muted">
-              We'll never share your Address
-            </Form.Text>
+            <Form.Text className="text-muted"></Form.Text>
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
 
@@ -191,20 +193,19 @@ function EditAddress() {
               required
               value={address.country || ""}
             />
-
-            <Form.Text className="text-muted">...</Form.Text>
+            <Form.Text className="text-muted"></Form.Text>
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
           {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group> */}
         </Row>
-        <Button variant="outline-info" type="submit" onClick={submitData}>
+        <Button variant="outline-info" type="button" onClick={submitData}>
           Submit
         </Button>
         <Button
           variant="outline-info"
-          type="submit"
+          type="button"
           onClick={() => navigate("/")}
         >
           Back{" "}
