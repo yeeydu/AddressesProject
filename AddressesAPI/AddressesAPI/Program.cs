@@ -30,7 +30,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Description = "Standard Autorization header using te Bearer scheme(\"Bearer {token}\")",
         In = ParameterLocation.Header,
-        Name = "Autorization",
+        Name = "Authorization",
         Type =  SecuritySchemeType.ApiKey
     });
 
@@ -44,7 +44,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!)),
         ValidateIssuer = false,
         ValidateAudience = false,
 
@@ -53,9 +53,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Add Automapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // Add Address Service
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
