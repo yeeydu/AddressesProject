@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { baseUrl } from "../Shared";
 import axios from "axios";
-import { useNavigate, useLocation, redirect } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useState } from "react";
 import { Col } from "react-bootstrap";
 import { IAddress } from "../types/addressTypes";
@@ -85,6 +85,7 @@ function AddAddress() {
               placeholder="Street"
               onChange={handleChange}
               value={address.street}
+              required
             />
             <Form.Text className="text-muted">
               We'll never share your Address

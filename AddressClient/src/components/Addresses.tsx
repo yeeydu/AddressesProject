@@ -2,13 +2,15 @@ import Table from "react-bootstrap/Table";
 import fetchHook from "./Fetch";
 import { baseUrl } from "../Shared";
 import { Button } from "react-bootstrap";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
 function Addresses() {
   const [info, setInfo] = useState();
   const { id } = useParams();
+
+  let navigate = useNavigate();
 
   // API baseUrl
   const url = baseUrl;
@@ -24,31 +26,6 @@ function Addresses() {
       //Authorization: "Bearer ",
     },
   });
-
-  /*
-   if(location?.state){
-          Swal.fire({
-            icon: "success",
-            title: location?.state?.message,
-          });
-          redirect(location.pathname, {replace: true});
-        }
-        */
-
-  // const deleteAddress = fetchHook(url +"/"+ id, {
-  //   method: "DELETE",
-  //   headers: {
-  //     //"Content-Type": "application/json",
-  //     //Authorization: "Bearer ",
-  //   },
-  // });
-
-  const deleteAddress = (id: any) => {
-    axios.delete(url + "/" + id).then((getData) => {
-      setInfo(getData.data);
-    });
-    console.log(`item ${id} deleted `);
-  };
 
   //we can use "striped bordered" style
   return (
@@ -84,7 +61,7 @@ function Addresses() {
                       </Link>
                       <Link to={"/delete/" + address.id}>
                         <Button
-                          onClick={deleteAddress}
+                          onClick={() => navigate("delete/id")}
                           variant="outline-danger"
                           size="sm"
                         >

@@ -30,19 +30,20 @@ export default function DeleteAddress() {
     <div className="container">
       <div>
         <h3 className="text-center mb-5">Delete Address</h3>
-        <h4>Are you sure you want to delete this address?</h4>
+        <h4 className="text-center">Are you sure you want to delete this address?</h4>
       </div>
-
-      <Button variant="outline-info" type="submit" onClick={submitData}>
+      <div className="col-md-12 text-center">
+      <Button  variant="outline-info" type="submit" onClick={submitData}>
         Submit
       </Button>
       <Button
         variant="outline-info"
         type="submit"
         onClick={() => navigate("/")}
-      >
+        >
         Back{" "}
       </Button>
+      </div>
     </div>
   );
 }
