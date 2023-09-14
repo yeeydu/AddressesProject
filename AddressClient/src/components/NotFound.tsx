@@ -1,6 +1,10 @@
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+/**
+ *  404 not found page
+ */
+
 export default function NotFound({ message }: any) {
   const navigate = useNavigate();
   const goBack = () => {

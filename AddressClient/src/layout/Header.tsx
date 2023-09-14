@@ -4,6 +4,10 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
+/**
+ * 
+ * Header with navbar and logo
+ */
 function Header(props: { children: any }) {
   return (
     <div className="m-5 p-5">
@@ -14,8 +18,8 @@ function Header(props: { children: any }) {
         data-bs-theme="light"
         fixed="top"
       >
-        <Container>
-          <Navbar.Brand href="/"><img src="./public/assets/address.svg" width={30}/> </Navbar.Brand>
+        <Container> 
+          <Navbar.Brand href="/"><img src="/assets/address.svg" width={30}/> </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -25,15 +29,6 @@ function Header(props: { children: any }) {
             >
               <Nav.Link href="/">Home</Nav.Link>
             </Nav>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-info">Search</Button>
-            </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>

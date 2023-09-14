@@ -19,7 +19,7 @@ function EditAddress() {
   });
 
   let navigate = useNavigate();
-
+  //get id from parameter
   const { id } = useParams();
 
   // fetch data to show in form
@@ -37,6 +37,9 @@ function EditAddress() {
     });
   }, []);
 
+  /**
+   *  submit info to API
+   */
   const submitData = () => {
     if (
       address.street === "" ||
@@ -67,15 +70,18 @@ function EditAddress() {
         },
       })
       .then((response) => {
-        navigate("/", { state: { message: "Address edited succesfully" } }); 
+        navigate("/", { state: { message: "Address edited succesfully" } });
       })
       .catch((error) => {
         console.log(error);
       });
-      //navigate("/")
+    //navigate("/")
     console.log(`Item edited `);
   };
 
+  /**
+   *  handle all changes from form
+   */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setAddress({

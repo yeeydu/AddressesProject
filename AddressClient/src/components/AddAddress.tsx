@@ -21,6 +21,10 @@ function AddAddress() {
 
   let navigate = useNavigate();
 
+  /**
+   *
+   * Submit info Function
+   */
   const submitData = () => {
     if (
       address.street === "" ||
@@ -65,6 +69,7 @@ function AddAddress() {
     console.log(`new item created `);
   };
 
+  /**  handle changes from form */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAddress({
       ...address,
