@@ -3,10 +3,11 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { baseUrl } from "../Shared";
 import axios from "axios";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Col } from "react-bootstrap";
 import { IAddress } from "../types/addressTypes";
+import Swal from "sweetalert2";
 
 function AddAddress() {
   const [address, setAddress] = useState<Partial<IAddress>>({
@@ -16,7 +17,7 @@ function AddAddress() {
     council: "",
     district: "",
     country: "",
-  }); 
+  });
 
   let navigate = useNavigate();
 
@@ -30,6 +31,12 @@ function AddAddress() {
       address.postal_code === ""
     ) {
       console.log("Enter Values");
+      Swal.fire({
+        title: "Error!",
+        text: "You must fill all fields",
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
       return;
     }
     const data: Partial<IAddress> = {
@@ -49,12 +56,12 @@ function AddAddress() {
         },
       })
       .then((response) => {
-        //navigate("/", {state: {message: "new Address added succesfully"}});
+        navigate("/", { state: { message: "New Address added succesfully" } });
       })
       .catch((error) => {
         console.log(error);
       });
-      navigate("/")
+    //navigate("/");
     console.log(`new item created `);
   };
 
@@ -187,7 +194,11 @@ function AddAddress() {
         <Button variant="outline-info" type="button" onClick={submitData}>
           Submit
         </Button>
-        <Button variant="outline-info" type="button" onClick={()=> navigate("/")}>
+        <Button
+          variant="outline-info"
+          type="button"
+          onClick={() => navigate("/")}
+        >
           Back{" "}
         </Button>
       </Form>
