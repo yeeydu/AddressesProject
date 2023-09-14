@@ -1,18 +1,6 @@
 import  { useEffect, useState } from "react";
 import axios from "axios";
 
-/*
-interface Props {
-  id: number;
-  street: string;
-  postal_code: string;
-  parish: string;
-  council: string;
-  district: string;
-  country: string;
-}
-*/
-
 export default function Fetch(url : any, {method, headers,  }: any = {}) {
 
   const [data, setData] = useState();
