@@ -33,12 +33,12 @@ export default function DeleteAddress() {
         <h4 className="text-center">Are you sure you want to delete this address?</h4>
       </div>
       <div className="col-md-12 text-center">
-      <Button  variant="outline-info" type="submit" onClick={submitData}>
+      <Button  variant="outline-info" type="button" onClick={submitData}>
         Submit
       </Button>
       <Button
         variant="outline-info"
-        type="submit"
+        type="button"
         onClick={() => navigate("/")}
         >
         Back{" "}
