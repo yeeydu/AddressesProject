@@ -36,6 +36,17 @@ Start Server
 ```
 
 
+## Connect SQL
+
+At the Appsettings.json file ConnectionStrings, use the DefaultConnection value to connect to the SQL Server. It can be different depending on the system OS you are using.
+
+You the can run in the VS terminal:
+```bash
+  dotnet-ef migrations add Addresses
+  dotnet-ef databse update
+```
+
+
 ## Shared Variables
 
 To make project normal fuctionallity, you must enter values for these two variables in the shared component. Depending on the system you are using, the DotNet Api can have different port.
