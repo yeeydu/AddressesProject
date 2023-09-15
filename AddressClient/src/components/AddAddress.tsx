@@ -11,6 +11,7 @@ import { IAddress } from "../types/addressTypes";
 import Swal from "sweetalert2";
 
 function AddAddress() {
+  const [error, setError] = useState();
   const [address, setAddress] = useState<Partial<IAddress>>({
     street: "",
     postal_code: "",
@@ -56,16 +57,18 @@ function AddAddress() {
     const url = baseUrl;
     axios
       .post(url, data, {
-        headers: {  // Bearer token for authentication
+        headers: {
+          // Bearer token for authentication
           Authorization: `Bearer ${JWTtoken}`,
           "Content-type": "application/json",
         },
-    })// @ts-ignore
+      }) // @ts-ignore
       .then((response) => {
         navigate("/", { state: { message: "New Address added succesfully" } });
       })
       .catch((error) => {
         console.log(error);
+        setError(error);
       });
     //navigate("/");
     console.log(`new item created `);
@@ -209,6 +212,9 @@ function AddAddress() {
           Back{" "}
         </Button>
       </Form>
+      {error
+        ? "Can't continue, you don't have permission or something went wrong"
+        : null}
     </div>
   );
 }
