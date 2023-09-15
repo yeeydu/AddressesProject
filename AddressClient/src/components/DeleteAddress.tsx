@@ -1,5 +1,6 @@
 import Button from "react-bootstrap/Button";
-import { baseUrl } from "../Shared";
+// @ts-ignore
+import { baseUrl , JWTtoken} from "../Shared";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -15,10 +16,11 @@ export default function DeleteAddress() {
     const url = baseUrl + "/" + id;
     axios
       .delete(url, {
-        headers: {
+        headers: {  // Bearer token for authentication
+          Authorization: `Bearer ${JWTtoken}`,
           "Content-type": "application/json",
         },
-      })
+    })// @ts-ignore
       .then((response) => {
         navigate("/", { state: { message: " Address deleted succesfully" } });
       })
