@@ -62,7 +62,8 @@ Once you paste the token you will have access to the api.
 You have to paste the same token in the JWTtoken variable in the shared component so you can access API in the front end app.
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Captura de ecrã 2023-09-15, às 10 58 19](https://github.com/yeeydu/AddressesProject/assets/60006668/22ab6d05-079b-4fb1-ab8a-a76cdaa860ae)
+![Captura de ecrã 2023-09-15, às 10 59 20](https://github.com/yeeydu/AddressesProject/assets/60006668/6c3cb590-54f7-4896-a3c9-5d9d3f2bb793)
 
 
 ## API Documentation
