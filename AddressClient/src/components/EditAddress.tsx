@@ -2,7 +2,8 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { baseUrl } from "../Shared";
+// @ts-ignore
+import { baseUrl, JWTtoken } from "../Shared";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IAddress } from "../types/addressTypes";
@@ -25,7 +26,12 @@ function EditAddress() {
   // fetch data to show in form
   useEffect(() => {
     const url = baseUrl + "/" + id;
-    axios.get<IAddress>(url).then((response) => {
+    axios.get<IAddress>(url, {
+      headers: {  // Bearer token for authentication
+        Authorization: `Bearer ${JWTtoken}`,
+        "Content-type": "application/json",
+      },
+  }).then((response) => {
       setAddress({
         street: response.data.data.street,
         council: response.data.data.council,
@@ -65,10 +71,10 @@ function EditAddress() {
     const url = baseUrl + "/" + id;
     axios
       .put(url, data, {
-        headers: {
-          "Content-type": "application/json",
+        headers: {  // Bearer token for authentication
+          Authorization: `Bearer ${JWTtoken}`
         },
-      })
+    })// @ts-ignore
       .then((response) => {
         navigate("/", { state: { message: "Address edited succesfully" } });
       })

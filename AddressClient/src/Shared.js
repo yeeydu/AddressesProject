@@ -1,1 +1,2 @@
 export const baseUrl = "https://localhost:7071/api/Address";
+export const JWTtoken = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibHVjYXMiLCJleHAiOjE2OTQ4NTIxMzl9.SCwQK9E9CwT9ItK-VziPEbcNJCBERiQ-lB9ch-OHifSeQ2OslJgMAInxGOJU9bFy8k6jz0YcgCdYGkJPX4IPng';

@@ -29,7 +29,7 @@ namespace AddressesAPI.Controllers
 
 
         [HttpGet, Authorize]
-        public ActionResult<string> Get()
+        public ActionResult<string> GetName()
         {
             var userName = _userService.GetUserName();
             return Ok(userName);

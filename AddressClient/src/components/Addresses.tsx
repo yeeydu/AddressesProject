@@ -1,6 +1,7 @@
 import Table from "react-bootstrap/Table";
-//import fetchHook from "./Fetch";
-import { baseUrl } from "../Shared";
+//import fetchHook from "./Fetch"; 
+// @ts-ignore
+import { baseUrl, JWTtoken } from "../Shared";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -25,7 +26,12 @@ function Addresses() {
    */
   const fetchAddressList = async () => {
     try {
-      const response = await axios.get<IAddress[]>(baseUrl + "/getall");
+      const response = await axios.get<IAddress[]>(baseUrl + "/getall", {
+        headers: {  // Bearer token for authentication
+          Authorization: `Bearer ${JWTtoken}`,
+          "Content-type": "application/json",
+        },
+    });// @ts-ignore
       setAddress(response.data.data);
       setLoading(false);
       if (location?.state) {
@@ -122,7 +128,7 @@ function Addresses() {
                 })
                 .reverse()
             : loading}
-          {error ? error : null}
+          {error ? "Can't Access Api or somethig went wrong" : null}
         </tbody>
       </Table>
     </>

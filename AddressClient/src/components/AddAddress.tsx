@@ -1,7 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { baseUrl } from "../Shared";
+// @ts-ignore
+import { baseUrl, JWTtoken } from "../Shared";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -55,10 +56,11 @@ function AddAddress() {
     const url = baseUrl;
     axios
       .post(url, data, {
-        headers: {
+        headers: {  // Bearer token for authentication
+          Authorization: `Bearer ${JWTtoken}`,
           "Content-type": "application/json",
         },
-      })
+    })// @ts-ignore
       .then((response) => {
         navigate("/", { state: { message: "New Address added succesfully" } });
       })
@@ -189,7 +191,7 @@ function AddAddress() {
               value={address.country}
             />
 
-            <Form.Text className="text-muted">...</Form.Text>
+            <Form.Text className="text-muted"></Form.Text>
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
           {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
