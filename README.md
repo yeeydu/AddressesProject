@@ -38,7 +38,7 @@ Start Server
 
 ## Shared Variables
 
-To make project normal fuctionallity, you must enter values for these two variables in the shared component.
+To make project normal fuctionallity, you must enter values for these two variables in the shared component. Depending on the system you are using, the DotNet Api can have different port.
 
 #### "The project localhost directory"
 export const baseUrl = "https://localhost:7071/api/Address";
@@ -51,7 +51,7 @@ Paste the token from the swagger login token generated:
 1. To get the token access swagger /api/Auth/register to register with a name and password.
 2. login with the name and password created in last step /api/Auth/register , the system will generate a token for you, something like:
 
-" eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3RyaW5nIiwiZXhwIjoxNjk0ODU4NzMzfQ.uv9BLUhuh1Gm3ZZVs35488ohpU-mWIqV9TUD1cBPeyqdymKzlg00ErEwX8M-0FpQ0ltFQT9kaKAOsCflFOSWnA "
+"eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3RyaW5nIiwiZXhwIjoxNjk0ODU4NzMzfQ.uv9BLUhuh1Gm3ZZVs35488ohpU-mWIqV9TUD1cBPeyqdymKzlg00ErEwX8M-0FpQ0ltFQT9kaKAOsCflFOSWnA"
 
 3. Click on the "Authorize" button on the top and paste the token with bearer at front like this:
 ```bash
@@ -59,7 +59,7 @@ bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoY
 ```
 
 Once you paste the token you will have access to the api.
-You have to paste the same token in the JWTtoken variable in the shared component so you can acces API in the front end app.
+You have to paste the same token in the JWTtoken variable in the shared component so you can access API in the front end app.
 ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
