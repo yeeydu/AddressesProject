@@ -128,7 +128,7 @@ function Addresses() {
                 })
                 .reverse()
             : loading}
-          {error ? "Can't Access Api or somethig went wrong" : null}
+          {error ? "Can't Access Api or something went wrong" : null}
         </tbody>
       </Table>
     </>
